@@ -16,6 +16,8 @@
 		BA6229C122C0924E005BE2CF /* icoCalculatorBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6229BE22C0924D005BE2CF /* icoCalculatorBack@2x.png */; };
 		BA6229C222C0924E005BE2CF /* icoCalculatorBack.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6229BF22C0924D005BE2CF /* icoCalculatorBack.png */; };
 		BA6229C322C0924E005BE2CF /* icoCalculatorBack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6229C022C0924E005BE2CF /* icoCalculatorBack@3x.png */; };
+		BA7A2FEA22C1B22B00A5D9AD /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */; };
+		BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,10 @@
 		BA6229BE22C0924D005BE2CF /* icoCalculatorBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icoCalculatorBack@2x.png"; sourceTree = "<group>"; };
 		BA6229BF22C0924D005BE2CF /* icoCalculatorBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icoCalculatorBack.png; sourceTree = "<group>"; };
 		BA6229C022C0924E005BE2CF /* icoCalculatorBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icoCalculatorBack@3x.png"; sourceTree = "<group>"; };
+		BA7A2FE822C1B22B00A5D9AD /* UIView+Borders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
+		BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Borders.m"; sourceTree = "<group>"; };
+		BA7A300022C2014E00A5D9AD /* Enum+Calculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Enum+Calculator.h"; sourceTree = "<group>"; };
+		BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Enum+Calculator.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,10 @@
 				BA62298E22C075C1005BE2CF /* AppDelegate.m */,
 				BA62299022C075C1005BE2CF /* ViewController.h */,
 				BA62299122C075C1005BE2CF /* ViewController.m */,
+				BA7A2FE822C1B22B00A5D9AD /* UIView+Borders.h */,
+				BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */,
+				BA7A300022C2014E00A5D9AD /* Enum+Calculator.h */,
+				BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -170,6 +180,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA62299222C075C1005BE2CF /* ViewController.m in Sources */,
+				BA7A2FEA22C1B22B00A5D9AD /* UIView+Borders.m in Sources */,
+				BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */,
 				BA62299D22C075C2005BE2CF /* main.m in Sources */,
 				BA62298F22C075C1005BE2CF /* AppDelegate.m in Sources */,
 			);

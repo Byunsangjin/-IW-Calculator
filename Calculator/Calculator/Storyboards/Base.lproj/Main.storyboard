@@ -30,12 +30,18 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUw-tp-pQO">
+                                                <rect key="frame" x="339" y="10" width="24" height="24"/>
+                                                <state key="normal" image="icoLineArrowDown"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="nPi-rR-1O0" firstAttribute="centerY" secondItem="sHU-GV-Vwm" secondAttribute="centerY" id="VKn-2S-NKE"/>
                                             <constraint firstItem="nPi-rR-1O0" firstAttribute="centerX" secondItem="sHU-GV-Vwm" secondAttribute="centerX" id="WBu-3G-K9h"/>
                                             <constraint firstAttribute="height" constant="44" id="ZEt-am-eoS"/>
+                                            <constraint firstItem="uUw-tp-pQO" firstAttribute="centerY" secondItem="nPi-rR-1O0" secondAttribute="centerY" id="hCt-D7-2nv"/>
+                                            <constraint firstAttribute="trailing" secondItem="uUw-tp-pQO" secondAttribute="trailing" constant="12" id="zAT-O8-kat"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-ih-81o">
@@ -94,7 +100,7 @@
                                                             <constraint firstItem="Agf-fC-apw" firstAttribute="centerY" secondItem="ob2-sR-gAG" secondAttribute="centerY" id="6pF-J9-aie"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lt7-Cf-efZ">
+                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lt7-Cf-efZ">
                                                         <rect key="frame" x="92" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HGc-0D-uNH">
@@ -110,7 +116,7 @@
                                                             <constraint firstItem="HGc-0D-uNH" firstAttribute="centerX" secondItem="Lt7-Cf-efZ" secondAttribute="centerX" id="hHe-F4-d7A"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-Qy-gm9">
+                                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-Qy-gm9">
                                                         <rect key="frame" x="184" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorBack" translatesAutoresizingMaskIntoConstraints="NO" id="UWt-wv-hUE">
@@ -123,7 +129,7 @@
                                                             <constraint firstItem="UWt-wv-hUE" firstAttribute="centerX" secondItem="h6z-Qy-gm9" secondAttribute="centerX" id="nM0-Qg-rh4"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78j-e4-Zag">
+                                                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78j-e4-Zag">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorDivision" translatesAutoresizingMaskIntoConstraints="NO" id="alc-n5-X9A">
@@ -141,7 +147,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="XzM-VB-Ira">
                                                 <rect key="frame" x="0.0" y="45.5" width="366" height="43.5"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ZI-HC-5TR">
+                                                    <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ZI-HC-5TR">
                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bo-Js-XXa">
@@ -157,7 +163,7 @@
                                                             <constraint firstItem="5Bo-Js-XXa" firstAttribute="centerX" secondItem="0ZI-HC-5TR" secondAttribute="centerX" id="UPu-pR-AVw"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-B0-icw">
+                                                    <view tag="8" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBB-B0-icw">
                                                         <rect key="frame" x="92" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-qh-DMs">
@@ -173,7 +179,7 @@
                                                             <constraint firstItem="vAu-qh-DMs" firstAttribute="centerY" secondItem="sBB-B0-icw" secondAttribute="centerY" id="iM8-xZ-WNM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCs-zQ-d5M">
+                                                    <view tag="9" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCs-zQ-d5M">
                                                         <rect key="frame" x="184" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGU-uy-ve8">
@@ -189,7 +195,7 @@
                                                             <constraint firstItem="vGU-uy-ve8" firstAttribute="centerY" secondItem="TCs-zQ-d5M" secondAttribute="centerY" id="lao-jg-SXB"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snZ-qC-YUx">
+                                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snZ-qC-YUx">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorMultiplication" translatesAutoresizingMaskIntoConstraints="NO" id="1fd-5p-5DD">
@@ -207,7 +213,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="NtR-3J-aKn">
                                                 <rect key="frame" x="0.0" y="91" width="366" height="43"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fY-M0-TGr">
+                                                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fY-M0-TGr">
                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="43"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edB-0j-k69">
@@ -223,7 +229,7 @@
                                                             <constraint firstItem="edB-0j-k69" firstAttribute="centerX" secondItem="2fY-M0-TGr" secondAttribute="centerX" id="VUm-Yc-zgD"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeP-Dp-bA8">
+                                                    <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aeP-Dp-bA8">
                                                         <rect key="frame" x="92" y="0.0" width="90" height="43"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC2-F6-rQo">
@@ -239,7 +245,7 @@
                                                             <constraint firstItem="vC2-F6-rQo" firstAttribute="centerY" secondItem="aeP-Dp-bA8" secondAttribute="centerY" id="H1K-pY-oEn"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bU2-Jt-063">
+                                                    <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bU2-Jt-063">
                                                         <rect key="frame" x="184" y="0.0" width="90" height="43"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkt-zX-nuE">
@@ -255,7 +261,7 @@
                                                             <constraint firstItem="Tkt-zX-nuE" firstAttribute="centerX" secondItem="bU2-Jt-063" secondAttribute="centerX" id="bFN-wm-pEE"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-51-RqV">
+                                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-51-RqV">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorSubtraction" translatesAutoresizingMaskIntoConstraints="NO" id="pyJ-tx-O1Y">
@@ -273,7 +279,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-TG-Rs5">
                                                 <rect key="frame" x="0.0" y="136" width="366" height="43.5"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-I3-xAq">
+                                                    <view tag="1" contentMode="scaleToFill" restorationIdentifier="asd" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-I3-xAq">
                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0s-ey-0Xf">
@@ -289,7 +295,7 @@
                                                             <constraint firstItem="P0s-ey-0Xf" firstAttribute="centerX" secondItem="Vj9-I3-xAq" secondAttribute="centerX" id="vTH-Jq-fc0"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yER-ao-fUK">
+                                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yER-ao-fUK">
                                                         <rect key="frame" x="92" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fym-jG-gyH">
@@ -305,7 +311,7 @@
                                                             <constraint firstItem="fym-jG-gyH" firstAttribute="centerY" secondItem="yER-ao-fUK" secondAttribute="centerY" id="XdX-L7-NW9"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvl-t3-0Cl">
+                                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvl-t3-0Cl">
                                                         <rect key="frame" x="184" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8B-bL-myV">
@@ -321,7 +327,7 @@
                                                             <constraint firstItem="n8B-bL-myV" firstAttribute="centerY" secondItem="gvl-t3-0Cl" secondAttribute="centerY" id="68f-Dw-MIQ"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dea-ds-ixb">
+                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dea-ds-ixb">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorAddition" translatesAutoresizingMaskIntoConstraints="NO" id="8TZ-On-Gwc">
@@ -339,7 +345,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="MRK-aA-r3v">
                                                 <rect key="frame" x="0.0" y="181.5" width="366" height="43.5"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKZ-qm-fnP">
+                                                    <view tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKZ-qm-fnP">
                                                         <rect key="frame" x="0.0" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorPlusminus" translatesAutoresizingMaskIntoConstraints="NO" id="BAs-F8-K6e">
@@ -368,7 +374,7 @@
                                                             <constraint firstItem="cc6-JY-xx9" firstAttribute="centerY" secondItem="xce-eh-i52" secondAttribute="centerY" id="gAx-ez-KXa"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYD-uY-IwV">
+                                                    <view tag="-2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NYD-uY-IwV">
                                                         <rect key="frame" x="184" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorPoint" translatesAutoresizingMaskIntoConstraints="NO" id="X6D-uc-77H">
@@ -427,17 +433,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outletCollection property="functionButtons" destination="YlA-fM-NuH" id="th7-nQ-Krr"/>
-                        <outletCollection property="functionButtons" destination="ob2-sR-gAG" id="eIw-eF-QLG"/>
-                        <outletCollection property="functionButtons" destination="Lt7-Cf-efZ" id="FeI-eJ-voh"/>
-                        <outletCollection property="functionButtons" destination="h6z-Qy-gm9" id="dMb-48-tTi"/>
+                        <outlet property="textLabel" destination="4Up-qt-kEQ" id="CHV-Va-hf2"/>
+                        <outlet property="titleView" destination="sHU-GV-Vwm" id="wBI-yC-AjJ"/>
                         <outletCollection property="functionButtons" destination="78j-e4-Zag" id="msd-Tz-ewl"/>
                         <outletCollection property="functionButtons" destination="snZ-qC-YUx" id="wez-s7-PRi"/>
                         <outletCollection property="functionButtons" destination="ulH-51-RqV" id="t16-lN-qyn"/>
                         <outletCollection property="functionButtons" destination="Dea-ds-ixb" id="dm0-To-x9P"/>
                         <outletCollection property="functionButtons" destination="dba-jO-bkz" id="mfR-YH-H71"/>
-                        <outletCollection property="functionButtons" destination="IKZ-qm-fnP" id="3SX-fJ-jbh"/>
-                        <outletCollection property="functionButtons" destination="NYD-uY-IwV" id="Aws-TO-MxP"/>
                         <outletCollection property="numberButtons" destination="xce-eh-i52" id="Da9-vU-jZb"/>
                         <outletCollection property="numberButtons" destination="Vj9-I3-xAq" id="Caj-uf-u0D"/>
                         <outletCollection property="numberButtons" destination="yER-ao-fUK" id="Ozp-1y-DS0"/>
@@ -448,6 +450,11 @@
                         <outletCollection property="numberButtons" destination="0ZI-HC-5TR" id="DUT-AY-e6g"/>
                         <outletCollection property="numberButtons" destination="sBB-B0-icw" id="4ia-hp-TRz"/>
                         <outletCollection property="numberButtons" destination="TCs-zQ-d5M" id="zKv-zA-rsJ"/>
+                        <outletCollection property="etcButtons" destination="ob2-sR-gAG" id="07q-Gv-DUO"/>
+                        <outletCollection property="etcButtons" destination="Lt7-Cf-efZ" id="Fep-Rg-Zfj"/>
+                        <outletCollection property="etcButtons" destination="h6z-Qy-gm9" id="DtR-Dn-M6z"/>
+                        <outletCollection property="etcButtons" destination="IKZ-qm-fnP" id="XbR-n3-iSQ"/>
+                        <outletCollection property="etcButtons" destination="NYD-uY-IwV" id="rrv-3q-DY6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -465,5 +472,6 @@
         <image name="icoCalculatorPoint" width="24" height="24"/>
         <image name="icoCalculatorResult" width="24" height="24"/>
         <image name="icoCalculatorSubtraction" width="24" height="24"/>
+        <image name="icoLineArrowDown" width="24" height="24"/>
     </resources>
 </document>
