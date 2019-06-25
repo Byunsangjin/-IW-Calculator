@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *numberButtons;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *etcButtons;
 
+@property double number;
+
 @end
 
 @implementation ViewController
@@ -66,8 +68,25 @@
 - (void)numBtnTouched: (UILongPressGestureRecognizer *)gesture {
     [self changeOpacityFromGesture:gesture];
     
+    
+    
     if (gesture.state == UIGestureRecognizerStateEnded) {
+        NSMutableString *numString = [NSMutableString stringWithFormat:@"%.9g", self.number]; // 소수점을 제외하고 9자리 수의 double형 format
+        if (numString.length >= 10) {
+            return;
+        }
         
+        NSNumber *n = [NSNumber numberWithDouble:self.number];
+        NSMutableString *stringNum = [[n stringValue] mutableCopy];
+        
+        if ([stringNum isEqualToString:@"0"]) {
+            stringNum = [@"" mutableCopy];
+        }
+        
+        [stringNum appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
+        
+        self.number = [stringNum doubleValue];
+        self.textLabel.text = stringNum;
     }
 }
 
@@ -83,7 +102,14 @@
     [self changeOpacityFromGesture:gesture];
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        
+        switch (gesture.view.tag) {
+            case CE:
+                self.number = 0;
+                self.textLabel.text = @"0";
+                break;
+            default:
+                break;
+        }
     }
 }
 

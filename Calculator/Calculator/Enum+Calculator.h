@@ -21,15 +21,12 @@ typedef enum : NSUInteger {
 } Operator;
 
 typedef enum : NSUInteger {
+    PLUSMINUS,
+    POINT,
     CE,
     C,
     DELETE
 } Etc;
-
-typedef enum : NSUInteger {
-    PLUSMINUS = -1,
-    POINT = -2
-} NumberPad;
 
 @end
 
