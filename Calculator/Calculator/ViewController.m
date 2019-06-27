@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "UIView+Borders.h"
 #import "Enum+Calculator.h"
+#import "CalculatorStack.h"
 
 @interface ViewController ()
 
@@ -19,7 +20,14 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *numberButtons;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *etcButtons;
 
-@property double number;
+@property NSMutableString *mString;
+
+@property NSString *lastPushedString;
+@property NSInteger lastOperator;
+
+@property BOOL isTurnedOperator;
+
+@property CalculatorStack *cStack;
 
 @end
 
@@ -29,6 +37,10 @@
     [super viewDidLoad];
     
     [self ButtonsAddGesture];
+    self.mString = [@"0" mutableCopy];
+    self.lastPushedString = self.mString;
+    self.isTurnedOperator = YES;
+    self.cStack = CalculatorStack.shared;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -63,30 +75,26 @@
         [tap setMinimumPressDuration:0.02];
         [buttonView addGestureRecognizer:tap];
     }
+    
+    
 }
 
 - (void)numBtnTouched: (UILongPressGestureRecognizer *)gesture {
     [self changeOpacityFromGesture:gesture];
     
-    
-    
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        NSMutableString *numString = [NSMutableString stringWithFormat:@"%.9g", self.number]; // 소수점을 제외하고 9자리 수의 double형 format
-        if (numString.length >= 10) {
+        NSInteger length = [self.mString containsString:@"."] ? self.mString.length - 1 : self.mString.length;
+        if (length > 8) {
             return;
         }
         
-        NSNumber *n = [NSNumber numberWithDouble:self.number];
-        NSMutableString *stringNum = [[n stringValue] mutableCopy];
+        if ([self.mString isEqualToString:@"0"] || [self.mString isEqualToString:@"-0"])
+            [self.mString replaceCharactersInRange:NSMakeRange(self.mString.length - 1, 1) withString:@""];
         
-        if ([stringNum isEqualToString:@"0"]) {
-            stringNum = [@"" mutableCopy];
-        }
+        [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
         
-        [stringNum appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
-        
-        self.number = [stringNum doubleValue];
-        self.textLabel.text = stringNum;
+        self.textLabel.text = self.mString;
+        self.isTurnedOperator = YES;
     }
 }
 
@@ -94,7 +102,36 @@
     [self changeOpacityFromGesture:gesture];
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
+        NSNumber *op = [NSNumber numberWithInteger:gesture.view.tag];
         
+        
+        
+        // Result 예외처리
+        if ([op integerValue] == RESULT) {
+            if ([self.cStack operatorCount] == 0) {
+                return;
+            }
+            
+            if ([self.cStack operandCount] == 1 && [self.cStack operatorCount] == 1) {
+                [self.cStack operatorPop];
+                return;
+            }
+        }
+        
+        [self.cStack push:self.mString];
+        
+        if([[self.cStack operatorPeek] integerValue] == MULTIPLE || [[self.cStack operatorPeek] integerValue] == DIVISION) {
+            [self.cStack calculate];
+        }
+        
+        if ([op integerValue] == ADD || [op integerValue] == SUB) {
+            [self.cStack calculate];
+        }
+        
+        [self.cStack push:op];
+        
+        self.mString = [@"0" mutableCopy];
+        self.textLabel.text = [self.cStack operandPeek];
     }
 }
 
@@ -103,13 +140,42 @@
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
         switch (gesture.view.tag) {
-            case CE:
-                self.number = 0;
-                self.textLabel.text = @"0";
+            case POINT: {
+                if (self.mString.length < 10 && ![self.mString containsString:@"."])
+                    [self.mString appendString:@"."];
+                
                 break;
+            }
+            case PLUSMINUS: {
+                if ([self.mString containsString:@"-"])
+                    [self.mString deleteCharactersInRange: NSMakeRange(0, 1)];
+                else
+                    [self.mString insertString:@"-" atIndex:0];
+                break;
+            }
+            case C: {
+                [self.cStack clearStack];
+                self.lastOperator = 0;
+                self.lastPushedString = @"0";
+            }
+            case CE: {
+                self.mString = [@"0" mutableCopy];
+                break;
+            }
+            case DELETE: {
+                NSInteger length = self.mString.length;
+                if (([self.mString containsString:@"-"] && length == 2) || length == 1)
+                    self.mString = [@"0" mutableCopy];
+                else
+                    [self.mString deleteCharactersInRange: NSMakeRange(length - 1, 1)];
+                break;
+            }
             default:
                 break;
         }
+        
+        self.textLabel.text = self.mString;
+        self.isTurnedOperator = YES;
     }
 }
 
