@@ -7,9 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "UIView+Borders.h"
+#import "Category/UIView+Borders.h"
 #import "Enum+Calculator.h"
 #import "CalculatorStack.h"
+#import "Category/NSString+Format.h"
 
 @interface ViewController ()
 
@@ -93,7 +94,7 @@
         
         [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
         
-        self.textLabel.text = self.mString;
+        self.textLabel.text = [self.mString decimalFormat];
         self.isTurnedOperator = YES;
     }
 }
@@ -104,19 +105,25 @@
     if (gesture.state == UIGestureRecognizerStateEnded) {
         NSNumber *op = [NSNumber numberWithInteger:gesture.view.tag];
         
-        
-        
         // Result 예외처리
         if ([op integerValue] == RESULT) {
             if ([self.cStack operatorCount] == 0) {
                 return;
             }
             
-            if ([self.cStack operandCount] == 1 && [self.cStack operatorCount] == 1) {
-                [self.cStack operatorPop];
+            if ([self.cStack operandCount] == 1) {
+                [self.cStack push:self.mString];
+                [self.cStack calculate];
+                
+                self.mString = [[self.cStack operandPop] mutableCopy];
+                self.textLabel.text = [self.mString decimalFormat];
                 return;
             }
         }
+        
+        if (self.isTurnedOperator == NO) {
+            [self.cStack changeLastOperator:op];
+        }        
         
         [self.cStack push:self.mString];
         
@@ -131,7 +138,7 @@
         [self.cStack push:op];
         
         self.mString = [@"0" mutableCopy];
-        self.textLabel.text = [self.cStack operandPeek];
+        self.textLabel.text = [[self.cStack operandPeek] decimalFormat];
     }
 }
 
@@ -174,7 +181,7 @@
                 break;
         }
         
-        self.textLabel.text = self.mString;
+        self.textLabel.text = [self.mString decimalFormat];
         self.isTurnedOperator = YES;
     }
 }

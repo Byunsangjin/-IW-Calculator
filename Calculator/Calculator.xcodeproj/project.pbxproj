@@ -19,6 +19,7 @@
 		BA7A2FEA22C1B22B00A5D9AD /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */; };
 		BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */; };
 		BA7A300522C319B300A5D9AD /* CalculatorStack.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300422C319B300A5D9AD /* CalculatorStack.m */; };
+		BA7A300D22C5B67F00A5D9AD /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300C22C5B67F00A5D9AD /* NSString+Format.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Enum+Calculator.m"; sourceTree = "<group>"; };
 		BA7A300322C319B300A5D9AD /* CalculatorStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorStack.h; sourceTree = "<group>"; };
 		BA7A300422C319B300A5D9AD /* CalculatorStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorStack.m; sourceTree = "<group>"; };
+		BA7A300B22C5B67F00A5D9AD /* NSString+Format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
+		BA7A300C22C5B67F00A5D9AD /* NSString+Format.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Format.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +82,11 @@
 				BA62298E22C075C1005BE2CF /* AppDelegate.m */,
 				BA62299022C075C1005BE2CF /* ViewController.h */,
 				BA62299122C075C1005BE2CF /* ViewController.m */,
-				BA7A2FE822C1B22B00A5D9AD /* UIView+Borders.h */,
-				BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */,
 				BA7A300022C2014E00A5D9AD /* Enum+Calculator.h */,
 				BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */,
 				BA7A300322C319B300A5D9AD /* CalculatorStack.h */,
 				BA7A300422C319B300A5D9AD /* CalculatorStack.m */,
+				BA7A300E22C5B69900A5D9AD /* Category */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -109,6 +111,17 @@
 				BA62299822C075C2005BE2CF /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		BA7A300E22C5B69900A5D9AD /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				BA7A2FE822C1B22B00A5D9AD /* UIView+Borders.h */,
+				BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */,
+				BA7A300B22C5B67F00A5D9AD /* NSString+Format.h */,
+				BA7A300C22C5B67F00A5D9AD /* NSString+Format.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +203,7 @@
 				BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */,
 				BA62299D22C075C2005BE2CF /* main.m in Sources */,
 				BA62298F22C075C1005BE2CF /* AppDelegate.m in Sources */,
+				BA7A300D22C5B67F00A5D9AD /* NSString+Format.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
