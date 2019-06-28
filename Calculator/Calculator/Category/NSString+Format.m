@@ -11,11 +11,28 @@
 @implementation NSString (Format)
 
 - (NSString *)decimalFormat {
+//    return self;
+    
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    NSNumber *number = [formatter numberFromString:self];
     
-    return [formatter stringFromNumber:number];
+    NSDecimalNumber *decimalN = [NSDecimalNumber decimalNumberWithString: self];
+    double integerPart = floor([decimalN doubleValue]);
+    double decimalPart = [decimalN doubleValue] - floor(integerPart);
+    
+    
+    if (integerPart > 1000000000) {
+        return [NSString stringWithFormat:@"%.9g", [self doubleValue]];
+    }
+    
+    NSString *integerString = [formatter stringFromNumber: [NSNumber numberWithInteger:integerPart]];
+    NSMutableString *decimalString = [[NSString stringWithFormat:@"%.9g", decimalPart] mutableCopy];
+    if (decimalString.length > 2) {
+        [decimalString deleteCharactersInRange: NSMakeRange(0, 2)];
+        return [NSString stringWithFormat:@"%@.%@", integerString, decimalString];
+    }
+    
+    return integerString;
 }
 
 @end
