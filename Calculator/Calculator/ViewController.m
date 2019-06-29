@@ -111,13 +111,13 @@
             if ([self.cStack operatorCount] == 0) {
                 return;
             }
-            
-            if ([self.cStack operandCount] == 1 && [self.cStack operatorCount] == 1) {
-                [self.cStack operatorPop];
-                return;
-            }
+//
+//            if ([self.cStack operandCount] == 1 && [self.cStack operatorCount] == 1) {
+//                [self.cStack operatorPop];
+//                return;
+//            }
         }
-        
+    
         [self.cStack push:self.mString];
         
         if([[self.cStack operatorPeek] integerValue] == MULTIPLE || [[self.cStack operatorPeek] integerValue] == DIVISION) {
