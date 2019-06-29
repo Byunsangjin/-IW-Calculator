@@ -7,9 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "UIView+Borders.h"
+#import "Category/UIView+Borders.h"
 #import "Enum+Calculator.h"
 #import "CalculatorStack.h"
+#import "Category/NSString+Format.h"
 
 @interface ViewController ()
 
@@ -21,12 +22,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *etcButtons;
 
 @property NSMutableString *mString;
-
-@property NSString *lastPushedString;
-@property NSInteger lastOperator;
-
 @property BOOL isTurnedOperator;
-
 @property CalculatorStack *cStack;
 
 @end
@@ -37,23 +33,20 @@
     [super viewDidLoad];
     
     [self ButtonsAddGesture];
+    
     self.mString = [@"0" mutableCopy];
-    self.lastPushedString = self.mString;
     self.isTurnedOperator = YES;
     self.cStack = CalculatorStack.shared;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    UIColor *borderColor = [UIColor colorWithRed:221/255.0 green:222/255.0 blue:224/255.0 alpha:1];
-    [self.titleView addLayerWithWidth:1 color:borderColor top:YES left:NO right:NO bottom:YES];
+    [self borderSet];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIColor *borderColor = [UIColor colorWithRed:221/255.0 green:222/255.0 blue:224/255.0 alpha:1];
-        [self.titleView addLayerWithWidth:1 color:borderColor top:YES left:NO right:NO bottom:YES];
+        [self borderSet];
     } completion:nil];
 }
 
@@ -75,8 +68,11 @@
         [tap setMinimumPressDuration:0.02];
         [buttonView addGestureRecognizer:tap];
     }
-    
-    
+}
+
+- (void)borderSet {
+    UIColor *borderColor = [UIColor colorWithRed:221/255.0 green:222/255.0 blue:224/255.0 alpha:1];
+    [self.titleView addLayerWithWidth:1 color:borderColor top:YES left:NO right:NO bottom:YES];
 }
 
 - (void)numBtnTouched: (UILongPressGestureRecognizer *)gesture {
@@ -93,7 +89,7 @@
         
         [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
         
-        self.textLabel.text = self.mString;
+        self.textLabel.text = [self.mString decimalFormat];
         self.isTurnedOperator = YES;
     }
 }
@@ -104,20 +100,29 @@
     if (gesture.state == UIGestureRecognizerStateEnded) {
         NSNumber *op = [NSNumber numberWithInteger:gesture.view.tag];
         
-        
-        
         // Result 예외처리
         if ([op integerValue] == RESULT) {
             if ([self.cStack operatorCount] == 0) {
                 return;
             }
-//
-//            if ([self.cStack operandCount] == 1 && [self.cStack operatorCount] == 1) {
-//                [self.cStack operatorPop];
-//                return;
-//            }
+            
+            if ([self.cStack operandCount] == 1) {
+                [self.cStack push:self.mString];
+                [self.cStack calculate];
+                
+                self.mString = [[self.cStack operandPop] mutableCopy];
+//                self.mString = [[NSString stringWithFormat:@"%.9g", [[self.cStack operandPop] doubleValue]] mutableCopy];
+                
+                self.textLabel.text = [self.mString decimalFormat];
+                return;
+            }
         }
-    
+        
+        if (self.isTurnedOperator == NO) {
+            [self.cStack changeLastOperator:op];
+            return;
+        }        
+        
         [self.cStack push:self.mString];
         
         if([[self.cStack operatorPeek] integerValue] == MULTIPLE || [[self.cStack operatorPeek] integerValue] == DIVISION) {
@@ -130,8 +135,9 @@
         
         [self.cStack push:op];
         
+        self.isTurnedOperator = NO;
         self.mString = [@"0" mutableCopy];
-        self.textLabel.text = [self.cStack operandPeek];
+        self.textLabel.text = [[self.cStack operandPeek] decimalFormat];
     }
 }
 
@@ -143,7 +149,6 @@
             case POINT: {
                 if (self.mString.length < 10 && ![self.mString containsString:@"."])
                     [self.mString appendString:@"."];
-                
                 break;
             }
             case PLUSMINUS: {
@@ -155,8 +160,6 @@
             }
             case C: {
                 [self.cStack clearStack];
-                self.lastOperator = 0;
-                self.lastPushedString = @"0";
             }
             case CE: {
                 self.mString = [@"0" mutableCopy];
@@ -174,7 +177,8 @@
                 break;
         }
         
-        self.textLabel.text = self.mString;
+        self.textLabel.text = [self.mString decimalFormat];
+//        self.textLabel.text = self.mString;
         self.isTurnedOperator = YES;
     }
 }
