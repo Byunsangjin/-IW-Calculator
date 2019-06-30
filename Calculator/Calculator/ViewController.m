@@ -89,6 +89,7 @@
         
         [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
         
+//        self.textLabel.text = [self.mString decimalFormat];
         self.textLabel.text = [self.mString decimalFormat];
         self.isTurnedOperator = YES;
     }
@@ -111,8 +112,6 @@
                 [self.cStack calculate];
                 
                 self.mString = [[self.cStack operandPop] mutableCopy];
-//                self.mString = [[NSString stringWithFormat:@"%.9g", [[self.cStack operandPop] doubleValue]] mutableCopy];
-                
                 self.textLabel.text = [self.mString decimalFormat];
                 return;
             }
@@ -136,8 +135,9 @@
         [self.cStack push:op];
         
         self.isTurnedOperator = NO;
-        self.mString = [@"0" mutableCopy];
+        
         self.textLabel.text = [[self.cStack operandPeek] decimalFormat];
+        self.mString = [@"0" mutableCopy];
     }
 }
 
@@ -178,7 +178,6 @@
         }
         
         self.textLabel.text = [self.mString decimalFormat];
-//        self.textLabel.text = self.mString;
         self.isTurnedOperator = YES;
     }
 }
@@ -197,6 +196,3 @@
 }
 
 @end
-
-
-
