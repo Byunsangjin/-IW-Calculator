@@ -92,7 +92,7 @@
         if ([self.mString isEqualToString:@"0"] || [self.mString isEqualToString:@"-0"])
             [self.mString replaceCharactersInRange:NSMakeRange(self.mString.length - 1, 1) withString:@""];
         
-        NSString *inputNumber = [NSString stringWithFormat:@"%ld", gesture.view.tag];
+        NSString *inputNumber = [NSString stringWithFormat:@"%ld", (long)gesture.view.tag];
         [self.mString appendString:inputNumber];
         
         [self inputedNumOrEtc];

@@ -26,10 +26,8 @@
     NSMutableString *integerString = [[NSString stringWithFormat:@"%.9g", integerPart] mutableCopy];
     NSMutableString *decimalString = [[NSString stringWithFormat:@"%.7g", decimalPart] mutableCopy]; // 8자리 이상부터 부동 소수점 문제 발생
     
-    if ([decimalString characterAtIndex:0] == '-') {
-        [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
-    }
-    
+    if ([decimalString characterAtIndex:0] == '-')
+        [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];    
     [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
     [integerString appendString:decimalString];
     
