@@ -40,9 +40,9 @@
 }
 
 - (void)push:(id)object {
-    if ([object isKindOfClass: [NSNumber class]]) {
+    if ([object isKindOfClass: [NSNumber class]]) { // Operator
         [self.operatorStack addObject:object];
-    } else {
+    } else { // Operand
         [self.operandStack addObject:object];
     }
 }
@@ -83,22 +83,22 @@
     
     double num1 = [[self operandPop] doubleValue];
     double num2 = [[self operandPop] doubleValue];
-    NSString *result;
     
+    NSString *result;
     NSInteger op = [[self operatorPop] integerValue];
     
     switch (op) {
         case ADD:
-            result = [NSString stringWithFormat:@"%.9f", num2 + num1];
+            result = [NSString stringWithFormat:@"%.9lf", num2 + num1];
             break;
         case SUB:
-            result = [NSString stringWithFormat:@"%.9f", num2 - num1];
+            result = [NSString stringWithFormat:@"%.9lf", num2 - num1];
             break;
         case MULTIPLE:
-            result = [NSString stringWithFormat:@"%.9f", num2 * num1];
-            break;
+            result = [NSString stringWithFormat:@"%.9lf", num2 * num1];
+            break;        
         case DIVISION:
-            result = [NSString stringWithFormat:@"%.9f", num2 / num1];
+            result = [NSString stringWithFormat:@"%.9lf", num2 / num1];
             break;
         default:
             break;

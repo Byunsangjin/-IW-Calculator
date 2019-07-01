@@ -11,6 +11,10 @@
 @implementation NSString (Format)
 
 - (NSString *)resultDecimal {
+    if ([self isEqualToString:@"NaN"]) {
+        return self;
+    }
+    
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
     
@@ -22,26 +26,25 @@
         return [NSString stringWithFormat:@"%.9g", [self doubleValue]];
     }
     
-    NSMutableString *integerString = [[formatter stringFromNumber: [NSNumber numberWithInteger:integerPart]] mutableCopy];
-    NSMutableString *decimalString = [[NSString stringWithFormat:@"%.9g", decimalPart] mutableCopy];
+    NSMutableString *integerString = [[NSString stringWithFormat:@"%g", integerPart] mutableCopy];
+    NSMutableString *decimalString = [[NSString stringWithFormat:@"%.7g", decimalPart] mutableCopy]; // 8자리 이상부터 부동 소수점 문제 발생
+    
+    if ([decimalString characterAtIndex:0] == '-') {
+        [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
+    }
     
     [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
     [integerString appendString:decimalString];
     
-    [integerString decimal];
-    
-    return integerString;
+    return [integerString decimal];
 }
 
 - (NSString *)decimal {
     NSInteger integerPart = [self integerValue];
     NSInteger integerLength = [NSString stringWithFormat:@"%ld", integerPart].length;
     
-    integerPart = [self roundOffWithNumber:integerPart];
-    
     if (integerPart > -1000 && integerPart < 1000)
         return self;
-    
     
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
@@ -51,6 +54,10 @@
     NSMutableString *wholeString = [self mutableCopy];
     [wholeString replaceCharactersInRange:NSMakeRange(0, integerLength) withString:integerString];
 
+    if ((wholeString.length - integerLength / 3) > 9) { // 소수점 존재하면...
+        return [wholeString substringToIndex: 9 + integerLength / 3 + 1];
+    }
+    
     return wholeString;
 }
 

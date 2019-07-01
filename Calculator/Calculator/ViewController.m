@@ -22,9 +22,9 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *etcButtons;
 
 @property NSMutableString *mString;
-@property BOOL isTurnedOperator;
 @property CalculatorStack *cStack;
 
+@property BOOL isTurnedOperator;
 @property BOOL isResultValue;
 
 @end
@@ -81,6 +81,9 @@
     [self changeOpacityFromGesture:gesture];
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
+        if (self.isResultValue)
+            self.mString = [@"0" mutableCopy];
+        
         NSInteger length = [self.mString containsString:@"."] ? self.mString.length - 1 : self.mString.length;
         if (length > 8) {
             return;
@@ -91,9 +94,9 @@
         
         [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
         
-//        self.textLabel.text = [self.mString decimalFormat];
         self.textLabel.text = [self.mString decimal];
         self.isTurnedOperator = YES;
+        self.isResultValue = NO;
     }
 }
 
@@ -102,8 +105,9 @@
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
         NSNumber *op = [NSNumber numberWithInteger:gesture.view.tag];
+        NSString *number = self.mString;
         
-        // Result 예외처리
+        // Result 처리
         if ([op integerValue] == RESULT) {
             self.isResultValue = YES;
             
@@ -111,8 +115,13 @@
                 return;
             }
             
-            if ([self.cStack operandCount] == 1) {                
-                [self.cStack push:self.mString];
+//            if (self.isTurnedOperator == NO) {
+//                number = [self.cStack operandPeek];
+//            }
+            
+            if ([self.cStack operandCount] == 1) {
+                
+                [self.cStack push:number];
                 [self.cStack calculate];
                 
                 self.mString = [[self.cStack operandPop] mutableCopy];
@@ -121,14 +130,15 @@
             }
         }
         
-        if (self.isTurnedOperator == NO) {
+        if (self.isTurnedOperator == NO) { // 연속해서 Operator를 눌렀다면
             [self.cStack changeLastOperator:op];
             return;
-        }        
+        }
         
-        [self.cStack push:self.mString];
+        [self.cStack push:number];
         
-        if([[self.cStack operatorPeek] integerValue] == MULTIPLE || [[self.cStack operatorPeek] integerValue] == DIVISION) {
+        NSInteger operator = [[self.cStack operatorPeek] integerValue];
+        if(operator == MULTIPLE || operator == DIVISION) {
             [self.cStack calculate];
         }
         
@@ -138,10 +148,11 @@
         
         [self.cStack push:op];
         
-        self.isTurnedOperator = NO;
-        
-        self.textLabel.text = [[self.cStack operandPeek] resultDecimal];
+        number = [self.cStack operandPeek];
+        self.textLabel.text = [number resultDecimal];
         self.mString = [@"0" mutableCopy];
+        
+        self.isTurnedOperator = NO;
     }
 }
 
@@ -149,8 +160,16 @@
     [self changeOpacityFromGesture:gesture];
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
+        if ([self.mString isEqualToString:@"NaN"]) {
+            self.mString = [@"0" mutableCopy];
+        }
+        
         switch (gesture.view.tag) {
             case POINT: {
+                if (self.isResultValue) {
+                    self.mString = [@"0" mutableCopy];
+                }
+            
                 if (self.mString.length < 10 && ![self.mString containsString:@"."])
                     [self.mString appendString:@"."];
                 break;
@@ -171,7 +190,7 @@
             }
             case DELETE: {
                 NSInteger length = self.mString.length;
-                if (([self.mString containsString:@"-"] && length == 2) || length == 1)
+                if (([self.mString containsString:@"-"] && length == 2) || length == 1 || self.isResultValue)
                     self.mString = [@"0" mutableCopy];
                 else
                     [self.mString deleteCharactersInRange: NSMakeRange(length - 1, 1)];
@@ -183,6 +202,7 @@
         
         self.textLabel.text = [self.mString decimal];
         self.isTurnedOperator = YES;
+        self.isResultValue = NO;
     }
 }
 
