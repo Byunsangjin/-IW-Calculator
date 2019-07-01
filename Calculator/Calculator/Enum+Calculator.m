@@ -10,6 +10,4 @@
 
 @implementation Enum_Calculator
 
-
-
 @end

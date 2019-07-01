@@ -89,26 +89,20 @@
     
     switch (op) {
         case ADD:
-//            result = [NSString stringWithFormat:@"%.9g", num2 + num1];
             result = [NSString stringWithFormat:@"%.9f", num2 + num1];
             break;
         case SUB:
-//            result = [NSString stringWithFormat:@"%.9g", num2 - num1];
             result = [NSString stringWithFormat:@"%.9f", num2 - num1];
             break;
         case MULTIPLE:
-//            result = [NSString stringWithFormat:@"%.9g", num2 * num1];
             result = [NSString stringWithFormat:@"%.9f", num2 * num1];
             break;
         case DIVISION:
-//            result = [NSString stringWithFormat:@"%.9g", num2 / num1];
             result = [NSString stringWithFormat:@"%.9f", num2 / num1];
             break;
         default:
             break;
     }
-    
-    NSLog(@"%@", result);
     
     [self push:result];
 }

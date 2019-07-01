@@ -11,8 +11,6 @@
 @implementation NSString (Format)
 
 - (NSString *)decimalFormat {
-//    return self;
-    
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
     
@@ -20,16 +18,30 @@
     double integerPart = floor([decimalN doubleValue]);
     double decimalPart = [decimalN doubleValue] - floor(integerPart);
     
+    if (integerPart < 1000) {
+        return self;
+    }
     
     if (integerPart > 1000000000) {
         return [NSString stringWithFormat:@"%.9g", [self doubleValue]];
     }
     
-    NSString *integerString = [formatter stringFromNumber: [NSNumber numberWithInteger:integerPart]];
+    NSMutableString *integerString = [[formatter stringFromNumber: [NSNumber numberWithInteger:integerPart]] mutableCopy];
     NSMutableString *decimalString = [[NSString stringWithFormat:@"%.9g", decimalPart] mutableCopy];
+    
+    NSLog(@"%@", decimalString);
     if (decimalString.length > 2) {
-        [decimalString deleteCharactersInRange: NSMakeRange(0, 2)];
-        return [NSString stringWithFormat:@"%@.%@", integerString, decimalString];
+        NSInteger commaCnt = integerString.length / 3;
+        
+        [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
+        [integerString appendString:decimalString];
+        
+        
+        NSInteger length = integerString.length;
+        if (length > 10) length = 10;
+        
+        
+        return [integerString substringWithRange:NSMakeRange(0, length + commaCnt)];
     }
     
     return integerString;

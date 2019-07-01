@@ -15,13 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 
-- (NSInteger)count;
 - (void)push: (id)object;
-- (id)pop;
-- (BOOL)checkLastObjectClass: (id)object;
+//- (BOOL)checkLastObjectClass: (id)object;
 - (void)changeLastOperator: (id)object;
-- (id)peek;
-- (NSInteger)lastOperator;
 //- (void)allCalculate;
 - (void)calculate;
 - (void)clearStack;
