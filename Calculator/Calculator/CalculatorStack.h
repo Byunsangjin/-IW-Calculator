@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)changeLastOperator: (id)object;
 - (id)peek;
 - (NSInteger)lastOperator;
-- (void)allCalculate;
+//- (void)allCalculate;
 - (void)calculate;
 - (void)clearStack;
 
