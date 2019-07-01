@@ -25,6 +25,8 @@
 @property BOOL isTurnedOperator;
 @property CalculatorStack *cStack;
 
+@property BOOL isResultValue;
+
 @end
 
 @implementation ViewController
@@ -90,7 +92,7 @@
         [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
         
 //        self.textLabel.text = [self.mString decimalFormat];
-        self.textLabel.text = [self.mString decimalFormat];
+        self.textLabel.text = [self.mString decimal];
         self.isTurnedOperator = YES;
     }
 }
@@ -103,16 +105,18 @@
         
         // Result 예외처리
         if ([op integerValue] == RESULT) {
+            self.isResultValue = YES;
+            
             if ([self.cStack operatorCount] == 0) {
                 return;
             }
             
-            if ([self.cStack operandCount] == 1) {
+            if ([self.cStack operandCount] == 1) {                
                 [self.cStack push:self.mString];
                 [self.cStack calculate];
                 
                 self.mString = [[self.cStack operandPop] mutableCopy];
-                self.textLabel.text = [self.mString decimalFormat];
+                self.textLabel.text = [self.mString resultDecimal];
                 return;
             }
         }
@@ -136,7 +140,7 @@
         
         self.isTurnedOperator = NO;
         
-        self.textLabel.text = [[self.cStack operandPeek] decimalFormat];
+        self.textLabel.text = [[self.cStack operandPeek] resultDecimal];
         self.mString = [@"0" mutableCopy];
     }
 }
@@ -177,7 +181,7 @@
                 break;
         }
         
-        self.textLabel.text = [self.mString decimalFormat];
+        self.textLabel.text = [self.mString decimal];
         self.isTurnedOperator = YES;
     }
 }

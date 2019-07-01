@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (Format)
 
-- (NSString *)decimalFormat;
+- (NSString *)resultDecimal;
+- (NSString *)decimal;
 
 @end
 

@@ -10,17 +10,13 @@
 
 @implementation NSString (Format)
 
-- (NSString *)decimalFormat {
+- (NSString *)resultDecimal {
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
     
     NSDecimalNumber *decimalN = [NSDecimalNumber decimalNumberWithString: self];
-    double integerPart = floor([decimalN doubleValue]);
-    double decimalPart = [decimalN doubleValue] - floor(integerPart);
-    
-    if (integerPart < 1000) {
-        return self;
-    }
+    double integerPart = [self roundOffWithNumber:[decimalN doubleValue]];
+    double decimalPart = [decimalN doubleValue] - integerPart;
     
     if (integerPart > 1000000000) {
         return [NSString stringWithFormat:@"%.9g", [self doubleValue]];
@@ -29,22 +25,42 @@
     NSMutableString *integerString = [[formatter stringFromNumber: [NSNumber numberWithInteger:integerPart]] mutableCopy];
     NSMutableString *decimalString = [[NSString stringWithFormat:@"%.9g", decimalPart] mutableCopy];
     
-    NSLog(@"%@", decimalString);
-    if (decimalString.length > 2) {
-        NSInteger commaCnt = integerString.length / 3;
-        
-        [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
-        [integerString appendString:decimalString];
-        
-        
-        NSInteger length = integerString.length;
-        if (length > 10) length = 10;
-        
-        
-        return [integerString substringWithRange:NSMakeRange(0, length + commaCnt)];
-    }
+    [decimalString deleteCharactersInRange: NSMakeRange(0, 1)];
+    [integerString appendString:decimalString];
+    
+    [integerString decimal];
     
     return integerString;
+}
+
+- (NSString *)decimal {
+    NSInteger integerPart = [self integerValue];
+    NSInteger integerLength = [NSString stringWithFormat:@"%ld", integerPart].length;
+    
+    integerPart = [self roundOffWithNumber:integerPart];
+    
+    if (integerPart > -1000 && integerPart < 1000)
+        return self;
+    
+    
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    
+    NSMutableString *integerString = [[formatter stringFromNumber: [NSNumber numberWithInteger:integerPart]] mutableCopy];
+    
+    NSMutableString *wholeString = [self mutableCopy];
+    [wholeString replaceCharactersInRange:NSMakeRange(0, integerLength) withString:integerString];
+
+    return wholeString;
+}
+
+- (double)roundOffWithNumber: (double)number {
+    if (number > 0)
+        number = floor(number);
+    else
+        number = ceil(number);
+    
+    return number;
 }
 
 @end
