@@ -115,10 +115,6 @@
                 return;
             }
             
-//            if (self.isTurnedOperator == NO) {
-//                number = [self.cStack operandPeek];
-//            }
-            
             if ([self.cStack operandCount] == 1) {
                 
                 [self.cStack push:number];
@@ -131,7 +127,8 @@
         }
         
         if (self.isTurnedOperator == NO) { // 연속해서 Operator를 눌렀다면
-            [self.cStack changeLastOperator:op];
+            if ([self.cStack operatorCount] != 0)
+                [self.cStack changeLastOperator:op];
             return;
         }
         

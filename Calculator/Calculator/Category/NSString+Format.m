@@ -15,9 +15,6 @@
         return self;
     }
     
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    [formatter setNumberStyle: NSNumberFormatterDecimalStyle];
-    
     NSDecimalNumber *decimalN = [NSDecimalNumber decimalNumberWithString: self];
     double integerPart = [self roundOffWithNumber:[decimalN doubleValue]];
     double decimalPart = [decimalN doubleValue] - integerPart;
@@ -26,7 +23,7 @@
         return [NSString stringWithFormat:@"%.9g", [self doubleValue]];
     }
     
-    NSMutableString *integerString = [[NSString stringWithFormat:@"%g", integerPart] mutableCopy];
+    NSMutableString *integerString = [[NSString stringWithFormat:@"%.9g", integerPart] mutableCopy];
     NSMutableString *decimalString = [[NSString stringWithFormat:@"%.7g", decimalPart] mutableCopy]; // 8자리 이상부터 부동 소수점 문제 발생
     
     if ([decimalString characterAtIndex:0] == '-') {
