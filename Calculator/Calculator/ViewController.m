@@ -24,8 +24,8 @@
 @property NSMutableString *mString;
 @property CalculatorStack *cStack;
 
-@property BOOL isTurnedOperator;
-@property BOOL isResultValue;
+@property BOOL isOperatorTurn;
+@property BOOL isResult;
 
 @end
 
@@ -37,7 +37,7 @@
     [self ButtonsAddGesture];
     
     self.mString = [@"0" mutableCopy];
-    self.isTurnedOperator = YES;
+    self.isOperatorTurn = YES;
     self.cStack = CalculatorStack.shared;
 }
 
@@ -81,7 +81,7 @@
     [self changeOpacityFromGesture:gesture];
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        if (self.isResultValue)
+        if (self.isResult)
             self.mString = [@"0" mutableCopy];
         
         NSInteger length = [self.mString containsString:@"."] ? self.mString.length - 1 : self.mString.length;
@@ -92,11 +92,10 @@
         if ([self.mString isEqualToString:@"0"] || [self.mString isEqualToString:@"-0"])
             [self.mString replaceCharactersInRange:NSMakeRange(self.mString.length - 1, 1) withString:@""];
         
-        [self.mString appendString:[NSString stringWithFormat:@"%ld", gesture.view.tag]];
+        NSString *inputNumber = [NSString stringWithFormat:@"%ld", gesture.view.tag];
+        [self.mString appendString:inputNumber];
         
-        self.textLabel.text = [self.mString decimal];
-        self.isTurnedOperator = YES;
-        self.isResultValue = NO;
+        [self inputedNumOrEtc];
     }
 }
 
@@ -109,7 +108,7 @@
         
         // Result 처리
         if ([op integerValue] == RESULT) {
-            self.isResultValue = YES;
+            self.isResult = YES;
             
             if ([self.cStack operatorCount] == 0) {
                 return;
@@ -124,11 +123,18 @@
                 self.textLabel.text = [self.mString resultDecimal];
                 return;
             }
+            
+            [self.cStack push:number];
+            [self.cStack allCalculate];
+            
+            self.mString = [[self.cStack operandPop] mutableCopy];
+            self.textLabel.text = [self.mString resultDecimal];
+            
+            return;
         }
         
-        if (self.isTurnedOperator == NO) { // 연속해서 Operator를 눌렀다면
-            if ([self.cStack operatorCount] != 0)
-                [self.cStack changeLastOperator:op];
+        if (self.isOperatorTurn == NO) { // 연속해서 Operator를 눌렀다면
+            [self.cStack changeLastOperator:op];
             return;
         }
         
@@ -149,7 +155,7 @@
         self.textLabel.text = [number resultDecimal];
         self.mString = [@"0" mutableCopy];
         
-        self.isTurnedOperator = NO;
+        self.isOperatorTurn = NO;
     }
 }
 
@@ -163,7 +169,7 @@
         
         switch (gesture.view.tag) {
             case POINT: {
-                if (self.isResultValue) {
+                if (self.isResult) {
                     self.mString = [@"0" mutableCopy];
                 }
             
@@ -187,7 +193,7 @@
             }
             case DELETE: {
                 NSInteger length = self.mString.length;
-                if (([self.mString containsString:@"-"] && length == 2) || length == 1 || self.isResultValue)
+                if (([self.mString containsString:@"-"] && length == 2) || length == 1 || self.isResult)
                     self.mString = [@"0" mutableCopy];
                 else
                     [self.mString deleteCharactersInRange: NSMakeRange(length - 1, 1)];
@@ -197,9 +203,7 @@
                 break;
         }
         
-        self.textLabel.text = [self.mString decimal];
-        self.isTurnedOperator = YES;
-        self.isResultValue = NO;
+        [self inputedNumOrEtc];
     }
 }
 
@@ -214,6 +218,12 @@
         opacityColor = [originColor colorWithAlphaComponent:1];
         [gesture.view setBackgroundColor:opacityColor];
     }
+}
+
+- (void)inputedNumOrEtc {
+    self.textLabel.text = [self.mString decimal];
+    self.isOperatorTurn = YES;
+    self.isResult = NO;
 }
 
 @end

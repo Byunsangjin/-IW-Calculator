@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)push: (id)object;
 - (void)changeLastOperator: (id)object;
 - (void)calculate;
+- (void)allCalculate;
 - (void)clearStack;
 
 - (NSNumber *)operatorPeek;

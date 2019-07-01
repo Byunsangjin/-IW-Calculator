@@ -107,14 +107,21 @@
     [self push:result];
 }
 
+- (void)allCalculate {
+    while([self operatorCount] !=0) {
+        [self calculate];
+    }
+}
+
 - (void)clearStack {
     self.operandStack = [NSMutableArray new];
     self.operatorStack = [NSMutableArray new];
 }
 
 - (void)changeLastOperator:(id)object {
-    [self operatorPop];
-    [self push:object];
+    if([self operatorPop] != NULL)
+        [self push:object];
+    return;
 }
 
 @end
