@@ -151,7 +151,7 @@
                     self.mString = [@"0" mutableCopy];
                 }
                 
-                if (self.mString.length < 10 && ![self.mString containsString:@"."])
+                if (self.mString.length < 9 && ![self.mString containsString:@"."])
                     [self.mString appendString:@"."];
                 break;
             }
