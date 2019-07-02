@@ -47,7 +47,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCx-ih-81o">
                                         <rect key="frame" x="5" y="49" width="366" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Up-qt-kEQ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Up-qt-kEQ">
                                                 <rect key="frame" x="5" y="0.0" width="245" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 <nil key="textColor"/>
@@ -433,13 +433,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="resultButton" destination="dba-jO-bkz" id="jRW-50-hHU"/>
                         <outlet property="textLabel" destination="4Up-qt-kEQ" id="CHV-Va-hf2"/>
                         <outlet property="titleView" destination="sHU-GV-Vwm" id="wBI-yC-AjJ"/>
                         <outletCollection property="functionButtons" destination="78j-e4-Zag" id="msd-Tz-ewl"/>
                         <outletCollection property="functionButtons" destination="snZ-qC-YUx" id="wez-s7-PRi"/>
                         <outletCollection property="functionButtons" destination="ulH-51-RqV" id="t16-lN-qyn"/>
                         <outletCollection property="functionButtons" destination="Dea-ds-ixb" id="dm0-To-x9P"/>
-                        <outletCollection property="functionButtons" destination="dba-jO-bkz" id="mfR-YH-H71"/>
                         <outletCollection property="numberButtons" destination="xce-eh-i52" id="Da9-vU-jZb"/>
                         <outletCollection property="numberButtons" destination="Vj9-I3-xAq" id="Caj-uf-u0D"/>
                         <outletCollection property="numberButtons" destination="yER-ao-fUK" id="Ozp-1y-DS0"/>

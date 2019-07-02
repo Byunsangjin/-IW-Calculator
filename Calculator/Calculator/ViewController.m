@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *functionButtons;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *numberButtons;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *etcButtons;
+@property (strong, nonatomic) IBOutlet UIView *resultButton;
 
 @property NSMutableString *mString;
 @property CalculatorStack *cStack;
@@ -70,6 +71,10 @@
         [tap setMinimumPressDuration:0.02];
         [buttonView addGestureRecognizer:tap];
     }
+    
+    UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(resultBtnTouched:)];
+    [tap setMinimumPressDuration:0.02];
+    [self.resultButton addGestureRecognizer:tap];
 }
 
 - (void)borderSet {
@@ -105,33 +110,6 @@
     if (gesture.state == UIGestureRecognizerStateEnded) {
         NSNumber *op = [NSNumber numberWithInteger:gesture.view.tag];
         NSString *number = self.mString;
-        
-        // Result 처리
-        if ([op integerValue] == RESULT) {
-            self.isResult = YES;
-            
-            if ([self.cStack operatorCount] == 0) {
-                return;
-            }
-            
-            if ([self.cStack operandCount] == 1) {
-                
-                [self.cStack push:number];
-                [self.cStack calculate];
-                
-                self.mString = [[self.cStack operandPop] mutableCopy];
-                self.textLabel.text = [self.mString resultDecimal];
-                return;
-            }
-            
-            [self.cStack push:number];
-            [self.cStack allCalculate];
-            
-            self.mString = [[self.cStack operandPop] mutableCopy];
-            self.textLabel.text = [self.mString resultDecimal];
-            
-            return;
-        }
         
         if (self.isOperatorTurn == NO) { // 연속해서 Operator를 눌렀다면
             [self.cStack changeLastOperator:op];
@@ -172,7 +150,7 @@
                 if (self.isResult) {
                     self.mString = [@"0" mutableCopy];
                 }
-            
+                
                 if (self.mString.length < 10 && ![self.mString containsString:@"."])
                     [self.mString appendString:@"."];
                 break;
@@ -204,6 +182,33 @@
         }
         
         [self inputedNumOrEtc];
+    }
+}
+
+- (void)resultBtnTouched: (UILongPressGestureRecognizer *)gesture {
+    [self changeOpacityFromGesture: gesture];
+    
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        self.isResult = YES;
+        if ([self.cStack operatorCount] == 0) {
+            return;
+        }
+        
+        NSString *number = self.mString;
+        if ([self.cStack operandCount] == 1) {
+            [self.cStack push:number];
+            [self.cStack calculate];
+            
+            self.mString = [[self.cStack operandPop] mutableCopy];
+            self.textLabel.text = [self.mString resultDecimal];
+            return;
+        }
+        
+        [self.cStack push:number];
+        [self.cStack allCalculate];
+        
+        self.mString = [[self.cStack operandPop] mutableCopy];
+        self.textLabel.text = [self.mString resultDecimal];
     }
 }
 
