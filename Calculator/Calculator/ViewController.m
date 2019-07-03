@@ -42,9 +42,12 @@
     self.cStack = CalculatorStack.shared;
 }
 
+- (void)viewWillLayoutSubviews {
+    [self borderSet];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self borderSet];
     
     [self.view setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.3]];
     
