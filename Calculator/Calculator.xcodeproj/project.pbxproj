@@ -20,6 +20,8 @@
 		BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */; };
 		BA7A300522C319B300A5D9AD /* CalculatorStack.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300422C319B300A5D9AD /* CalculatorStack.m */; };
 		BA7A300D22C5B67F00A5D9AD /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300C22C5B67F00A5D9AD /* NSString+Format.m */; };
+		BAD7727422CB580400673265 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAD7727322CB580400673265 /* Test.storyboard */; };
+		BAD7727722CB582600673265 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD7727622CB582600673265 /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,9 @@
 		BA7A300422C319B300A5D9AD /* CalculatorStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorStack.m; sourceTree = "<group>"; };
 		BA7A300B22C5B67F00A5D9AD /* NSString+Format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
 		BA7A300C22C5B67F00A5D9AD /* NSString+Format.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Format.m"; sourceTree = "<group>"; };
+		BAD7727322CB580400673265 /* Test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		BAD7727522CB582600673265 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		BAD7727622CB582600673265 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +91,8 @@
 				BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */,
 				BA7A300322C319B300A5D9AD /* CalculatorStack.h */,
 				BA7A300422C319B300A5D9AD /* CalculatorStack.m */,
+				BAD7727522CB582600673265 /* TestViewController.h */,
+				BAD7727622CB582600673265 /* TestViewController.m */,
 				BA7A300E22C5B69900A5D9AD /* Category */,
 			);
 			path = Calculator;
@@ -109,6 +116,7 @@
 			children = (
 				BA62299322C075C1005BE2CF /* Main.storyboard */,
 				BA62299822C075C2005BE2CF /* LaunchScreen.storyboard */,
+				BAD7727322CB580400673265 /* Test.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 				BA62299A22C075C2005BE2CF /* LaunchScreen.storyboard in Resources */,
 				BA6229C122C0924E005BE2CF /* icoCalculatorBack@2x.png in Resources */,
 				BA62299722C075C2005BE2CF /* Assets.xcassets in Resources */,
+				BAD7727422CB580400673265 /* Test.storyboard in Resources */,
 				BA62299522C075C1005BE2CF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +212,7 @@
 				BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */,
 				BA62299D22C075C2005BE2CF /* main.m in Sources */,
 				BA62298F22C075C1005BE2CF /* AppDelegate.m in Sources */,
+				BAD7727722CB582600673265 /* TestViewController.m in Sources */,
 				BA7A300D22C5B67F00A5D9AD /* NSString+Format.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

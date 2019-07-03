@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,7 +129,7 @@
                                                             <constraint firstItem="UWt-wv-hUE" firstAttribute="centerX" secondItem="h6z-Qy-gm9" secondAttribute="centerX" id="nM0-Qg-rh4"/>
                                                         </constraints>
                                                     </view>
-                                                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78j-e4-Zag">
+                                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="78j-e4-Zag">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorDivision" translatesAutoresizingMaskIntoConstraints="NO" id="alc-n5-X9A">
@@ -195,7 +195,7 @@
                                                             <constraint firstItem="vGU-uy-ve8" firstAttribute="centerY" secondItem="TCs-zQ-d5M" secondAttribute="centerY" id="lao-jg-SXB"/>
                                                         </constraints>
                                                     </view>
-                                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snZ-qC-YUx">
+                                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snZ-qC-YUx">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorMultiplication" translatesAutoresizingMaskIntoConstraints="NO" id="1fd-5p-5DD">
@@ -261,7 +261,7 @@
                                                             <constraint firstItem="Tkt-zX-nuE" firstAttribute="centerX" secondItem="bU2-Jt-063" secondAttribute="centerX" id="bFN-wm-pEE"/>
                                                         </constraints>
                                                     </view>
-                                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-51-RqV">
+                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-51-RqV">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorSubtraction" translatesAutoresizingMaskIntoConstraints="NO" id="pyJ-tx-O1Y">
@@ -327,7 +327,7 @@
                                                             <constraint firstItem="n8B-bL-myV" firstAttribute="centerY" secondItem="gvl-t3-0Cl" secondAttribute="centerY" id="68f-Dw-MIQ"/>
                                                         </constraints>
                                                     </view>
-                                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dea-ds-ixb">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dea-ds-ixb">
                                                         <rect key="frame" x="276" y="0.0" width="90" height="43.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icoCalculatorAddition" translatesAutoresizingMaskIntoConstraints="NO" id="8TZ-On-Gwc">
@@ -433,6 +433,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="mainView" destination="fi4-g8-Z7E" id="AK2-1s-0We"/>
                         <outlet property="resultButton" destination="dba-jO-bkz" id="jRW-50-hHU"/>
                         <outlet property="textLabel" destination="4Up-qt-kEQ" id="CHV-Va-hf2"/>
                         <outlet property="titleView" destination="sHU-GV-Vwm" id="wBI-yC-AjJ"/>

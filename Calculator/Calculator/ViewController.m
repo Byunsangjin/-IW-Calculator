@@ -45,6 +45,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self borderSet];
+    
+    [self.view setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.3]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backViewTouched:)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -229,6 +234,11 @@
     self.textLabel.text = [self.mString decimal];
     self.isOperatorTurn = YES;
     self.isResult = NO;
+}
+
+- (void)backViewTouched: (UITapGestureRecognizer *)gesture{
+    [self removeFromParentViewController];
+    [self.view removeFromSuperview];
 }
 
 @end

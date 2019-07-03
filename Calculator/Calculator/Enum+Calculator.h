@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Enum_Calculator : NSObject
 
 typedef enum : NSUInteger {
-    RESULT,
     ADD,
     SUB,
     MULTIPLE,
