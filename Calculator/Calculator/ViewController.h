@@ -8,10 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    ADD,
+    SUB,
+    MULTIPLE,
+    DIVISION
+} Operator;
+
+typedef enum : NSUInteger {
+    PLUSMINUS,
+    POINT,
+    CE,
+    C,
+    DELETE
+} Etc;
+
 @interface ViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *mainView;
-
 
 @end
 

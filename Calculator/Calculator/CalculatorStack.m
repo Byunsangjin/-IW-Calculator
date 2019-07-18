@@ -8,7 +8,6 @@
 
 #import "CalculatorStack.h"
 
-
 @interface CalculatorStack()
 
 @property NSMutableArray *operatorStack;
@@ -108,7 +107,7 @@
 }
 
 - (void)allCalculate {
-    while([self operatorCount] !=0) {
+    while([self operatorCount] != 0) {
         [self calculate];
     }
 }

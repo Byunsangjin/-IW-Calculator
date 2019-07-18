@@ -10,53 +10,15 @@
 
 @implementation UIView (Borders)
 
-- (void)addLayerWithWidth: (CGFloat)width color: (UIColor *)color top: (BOOL)top left: (BOOL)left right: (BOOL)right bottom:(BOOL)bottom  {
-    if (top) {
-        [self.layer addSublayer: [self getTopLayerWithWidth:width color:color]];
-    }
-    
-    if (left) {
-        [self.layer addSublayer: [self getLeftLayerWithWidth:width color:color]];
-    }
-    
-    if (right) {
-        [self.layer addSublayer: [self getRightLayerWithWidth:width color:color]];
-    }
-    
-    if (bottom) {
-        [self.layer addSublayer: [self getBottomLayerWithWidth:width color:color]];
-    }
-}
-
-- (CALayer *)getLayerWithFrame: (CGRect)frame {
+- (void)addLayerWithWidth:(CGFloat)width color:(UIColor *)color direction:(Border)direction {
     CALayer *layer = [CALayer layer];
-    layer.frame = frame;
+    layer.backgroundColor = color.CGColor;
+    layer.frame = CGRectMake(direction & RIGHT ? self.frame.size.width - width : 0,
+                             direction & BOTTOM ? self.frame.size.height - width : 0,
+                             direction & (LEFT|RIGHT) ? width : self.frame.size.width,
+                             direction & (LEFT|RIGHT) ? self.frame.size.height : width);
     
-    return layer;
-}
-
-- (CALayer *)getTopLayerWithWidth: (CGFloat)width color: (UIColor *)color {
-    CALayer *layer = [self getLayerWithFrame:CGRectMake(0, 0, self.frame.size.width, width)];
-    layer.backgroundColor = color.CGColor;
-    return layer;
-}
-
-- (CALayer *)getLeftLayerWithWidth: (CGFloat)width color: (UIColor *)color {
-    CALayer *layer = [self getLayerWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
-    layer.backgroundColor = color.CGColor;
-    return layer;
-}
-
-- (CALayer *)getRightLayerWithWidth: (CGFloat)width color: (UIColor *)color {
-    CALayer *layer = [self getLayerWithFrame:CGRectMake(self.frame.size.width - width, 0, width, self.frame.size.height)];
-    layer.backgroundColor = color.CGColor;
-    return layer;
-}
-
-- (CALayer *)getBottomLayerWithWidth: (CGFloat)width color: (UIColor *)color {
-    CALayer *layer = [self getLayerWithFrame:CGRectMake(0, self.frame.size.height - width, self.frame.size.width, width)];
-    layer.backgroundColor = color.CGColor;
-    return layer;
+    [self.layer addSublayer:layer];
 }
 
 @end

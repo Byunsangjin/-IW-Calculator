@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "Category/UIView+Borders.h"
-#import "Enum+Calculator.h"
 #import "CalculatorStack.h"
 #import "Category/NSString+Format.h"
 
@@ -22,7 +21,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *etcButtons;
 @property (strong, nonatomic) IBOutlet UIView *resultButton;
 
-@property NSMutableString *mString;
+@property NSMutableString *numberString;
 @property CalculatorStack *cStack;
 
 @property BOOL isOperatorTurn;
@@ -37,7 +36,7 @@
     
     [self ButtonsAddGesture];
     
-    self.mString = [@"0" mutableCopy];
+    self.numberString = [@"0" mutableCopy];
     self.isOperatorTurn = YES;
     self.cStack = CalculatorStack.shared;
 }
@@ -62,32 +61,25 @@
 }
 
 - (void)ButtonsAddGesture {
-    for (UIView *buttonView in self.functionButtons) {
-        UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(operatorBtnTouched:)];
-        [tap setMinimumPressDuration:0.02];
-        [buttonView addGestureRecognizer:tap];
-    }
-    
-    for (UIView *buttonView in self.numberButtons) {
-        UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(numBtnTouched:)];
-        [tap setMinimumPressDuration:0.02];
-        [buttonView addGestureRecognizer:tap];
-    }
-    
-    for (UIView *buttonView in self.etcButtons) {
-        UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(etcBtnTouched:)];
-        [tap setMinimumPressDuration:0.02];
-        [buttonView addGestureRecognizer:tap];
-    }
-    
-    UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(resultBtnTouched:)];
-    [tap setMinimumPressDuration:0.02];
-    [self.resultButton addGestureRecognizer:tap];
+    NSDictionary *buttonDic = @{@"operatorBtnTouched:" : self.functionButtons,
+                                @"numBtnTouched:" : self.numberButtons,
+                                @"etcBtnTouched:" : self.etcButtons,
+                                @"resultBtnTouched:" : [NSArray arrayWithObject:self.resultButton]};
+
+    [buttonDic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        SEL selector = NSSelectorFromString(key);
+        
+        for (UIView *buttonView in obj) {
+            UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:selector];
+            [tap setMinimumPressDuration:0.02];
+            [buttonView addGestureRecognizer:tap];
+        }
+    }];
 }
 
 - (void)borderSet {
     UIColor *borderColor = [UIColor colorWithRed:221/255.0 green:222/255.0 blue:224/255.0 alpha:1];
-    [self.titleView addLayerWithWidth:1 color:borderColor top:YES left:NO right:NO bottom:YES];
+    [self.titleView addLayerWithWidth:1 color:borderColor direction:TOP|BOTTOM];
 }
 
 - (void)numBtnTouched: (UILongPressGestureRecognizer *)gesture {
@@ -95,18 +87,18 @@
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
         if (self.isResult)
-            self.mString = [@"0" mutableCopy];
+            self.numberString = [@"0" mutableCopy];
         
-        NSInteger length = [self.mString containsString:@"."] ? self.mString.length - 1 : self.mString.length;
+        NSInteger length = [self.numberString containsString:@"."] ? self.numberString.length - 1 : self.numberString.length;
         if (length > 8) {
             return;
         }
         
-        if ([self.mString isEqualToString:@"0"] || [self.mString isEqualToString:@"-0"])
-            [self.mString replaceCharactersInRange:NSMakeRange(self.mString.length - 1, 1) withString:@""];
+        if ([self.numberString isEqualToString:@"0"] || [self.numberString isEqualToString:@"-0"])
+            [self.numberString replaceCharactersInRange:NSMakeRange(self.numberString.length - 1, 1) withString:@""];
         
         NSString *inputNumber = [NSString stringWithFormat:@"%ld", (long)gesture.view.tag];
-        [self.mString appendString:inputNumber];
+        [self.numberString appendString:inputNumber];
         
         [self inputedNumOrEtc];
     }
@@ -117,7 +109,7 @@
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
         NSNumber *op = [NSNumber numberWithInteger:gesture.view.tag];
-        NSString *number = self.mString;
+        NSString *number = self.numberString;
         
         if (self.isOperatorTurn == NO) { // 연속해서 Operator를 눌렀다면
             [self.cStack changeLastOperator:op];
@@ -139,7 +131,7 @@
         
         number = [self.cStack operandPeek];
         self.textLabel.text = [number resultDecimal];
-        self.mString = [@"0" mutableCopy];
+        self.numberString = [@"0" mutableCopy];
         
         self.isOperatorTurn = NO;
     }
@@ -149,40 +141,39 @@
     [self changeOpacityFromGesture:gesture];
     
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        if ([self.mString isEqualToString:@"NaN"]) {
-            self.mString = [@"0" mutableCopy];
+        if ([self.numberString isEqualToString:@"NaN"]) {
+            self.numberString = [@"0" mutableCopy];
         }
         
         switch (gesture.view.tag) {
             case POINT: {
-                if (self.isResult) {
-                    self.mString = [@"0" mutableCopy];
-                }
+                if (self.isResult)
+                    self.numberString = [@"0" mutableCopy];
                 
-                if (self.mString.length < 9 && ![self.mString containsString:@"."])
-                    [self.mString appendString:@"."];
+                if (self.numberString.length < 9 && ![self.numberString containsString:@"."])
+                    [self.numberString appendString:@"."];
                 break;
             }
             case PLUSMINUS: {
-                if ([self.mString containsString:@"-"])
-                    [self.mString deleteCharactersInRange: NSMakeRange(0, 1)];
+                if ([self.numberString containsString:@"-"])
+                    [self.numberString deleteCharactersInRange: NSMakeRange(0, 1)];
                 else
-                    [self.mString insertString:@"-" atIndex:0];
+                    [self.numberString insertString:@"-" atIndex:0];
                 break;
             }
             case C: {
                 [self.cStack clearStack];
             }
             case CE: {
-                self.mString = [@"0" mutableCopy];
+                self.numberString = [@"0" mutableCopy];
                 break;
             }
             case DELETE: {
-                NSInteger length = self.mString.length;
-                if (([self.mString containsString:@"-"] && length == 2) || length == 1 || self.isResult)
-                    self.mString = [@"0" mutableCopy];
+                NSInteger length = self.numberString.length;
+                if (([self.numberString containsString:@"-"] && length == 2) || length == 1 || self.isResult)
+                    self.numberString = [@"0" mutableCopy];
                 else
-                    [self.mString deleteCharactersInRange: NSMakeRange(length - 1, 1)];
+                    [self.numberString deleteCharactersInRange: NSMakeRange(length - 1, 1)];
                 break;
             }
             default:
@@ -202,21 +193,21 @@
             return;
         }
         
-        NSString *number = self.mString;
+        NSString *number = self.numberString;
         if ([self.cStack operandCount] == 1) {
             [self.cStack push:number];
             [self.cStack calculate];
             
-            self.mString = [[self.cStack operandPop] mutableCopy];
-            self.textLabel.text = [self.mString resultDecimal];
+            self.numberString = [[self.cStack operandPop] mutableCopy];
+            self.textLabel.text = [self.numberString resultDecimal];
             return;
         }
         
         [self.cStack push:number];
         [self.cStack allCalculate];
         
-        self.mString = [[self.cStack operandPop] mutableCopy];
-        self.textLabel.text = [self.mString resultDecimal];
+        self.numberString = [[self.cStack operandPop] mutableCopy];
+        self.textLabel.text = [self.numberString resultDecimal];
     }
 }
 
@@ -234,12 +225,12 @@
 }
 
 - (void)inputedNumOrEtc {
-    self.textLabel.text = [self.mString decimal];
+    self.textLabel.text = [self.numberString decimal];
     self.isOperatorTurn = YES;
     self.isResult = NO;
 }
 
-- (void)backViewTouched: (UITapGestureRecognizer *)gesture{
+- (void)backViewTouched: (UITapGestureRecognizer *)gesture {
     [self removeFromParentViewController];
     [self.view removeFromSuperview];
 }

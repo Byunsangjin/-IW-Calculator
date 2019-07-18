@@ -17,7 +17,6 @@
 		BA6229C222C0924E005BE2CF /* icoCalculatorBack.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6229BF22C0924D005BE2CF /* icoCalculatorBack.png */; };
 		BA6229C322C0924E005BE2CF /* icoCalculatorBack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA6229C022C0924E005BE2CF /* icoCalculatorBack@3x.png */; };
 		BA7A2FEA22C1B22B00A5D9AD /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */; };
-		BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */; };
 		BA7A300522C319B300A5D9AD /* CalculatorStack.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300422C319B300A5D9AD /* CalculatorStack.m */; };
 		BA7A300D22C5B67F00A5D9AD /* NSString+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7A300C22C5B67F00A5D9AD /* NSString+Format.m */; };
 		BAD7727422CB580400673265 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAD7727322CB580400673265 /* Test.storyboard */; };
@@ -40,8 +39,6 @@
 		BA6229C022C0924E005BE2CF /* icoCalculatorBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icoCalculatorBack@3x.png"; sourceTree = "<group>"; };
 		BA7A2FE822C1B22B00A5D9AD /* UIView+Borders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
 		BA7A2FE922C1B22B00A5D9AD /* UIView+Borders.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Borders.m"; sourceTree = "<group>"; };
-		BA7A300022C2014E00A5D9AD /* Enum+Calculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Enum+Calculator.h"; sourceTree = "<group>"; };
-		BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Enum+Calculator.m"; sourceTree = "<group>"; };
 		BA7A300322C319B300A5D9AD /* CalculatorStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorStack.h; sourceTree = "<group>"; };
 		BA7A300422C319B300A5D9AD /* CalculatorStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorStack.m; sourceTree = "<group>"; };
 		BA7A300B22C5B67F00A5D9AD /* NSString+Format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Format.h"; sourceTree = "<group>"; };
@@ -87,8 +84,6 @@
 				BA62298E22C075C1005BE2CF /* AppDelegate.m */,
 				BA62299022C075C1005BE2CF /* ViewController.h */,
 				BA62299122C075C1005BE2CF /* ViewController.m */,
-				BA7A300022C2014E00A5D9AD /* Enum+Calculator.h */,
-				BA7A300122C2014E00A5D9AD /* Enum+Calculator.m */,
 				BA7A300322C319B300A5D9AD /* CalculatorStack.h */,
 				BA7A300422C319B300A5D9AD /* CalculatorStack.m */,
 				BAD7727522CB582600673265 /* TestViewController.h */,
@@ -209,7 +204,6 @@
 				BA62299222C075C1005BE2CF /* ViewController.m in Sources */,
 				BA7A2FEA22C1B22B00A5D9AD /* UIView+Borders.m in Sources */,
 				BA7A300522C319B300A5D9AD /* CalculatorStack.m in Sources */,
-				BA7A300222C2014E00A5D9AD /* Enum+Calculator.m in Sources */,
 				BA62299D22C075C2005BE2CF /* main.m in Sources */,
 				BA62298F22C075C1005BE2CF /* AppDelegate.m in Sources */,
 				BAD7727722CB582600673265 /* TestViewController.m in Sources */,
