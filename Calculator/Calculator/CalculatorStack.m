@@ -11,6 +11,8 @@
 @interface CalculatorStack()
 
 @property NSMutableArray *operatorStack;
+/// - 입력한 숫자를 저장하는 Stack
+/// - 오브젝트 값이 String인 이유는 NSNumber로 하게 되면 일정 소수점 자리수 밖에 나타내지 못하기 때문
 @property NSMutableArray *operandStack;
 
 @end
